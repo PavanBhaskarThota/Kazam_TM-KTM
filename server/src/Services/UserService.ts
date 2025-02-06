@@ -24,7 +24,10 @@ class UserService {
       });
 
       return {
-        userDetails: newUser,
+        userDetails: {
+          name: newUser.name,
+          email: newUser.email,
+        },
         accessToken,
         refreshToken,
         message: "User created successfully",
@@ -56,7 +59,10 @@ class UserService {
         expiresIn: "7d",
       });
       return {
-        userDetails: userExists,
+        userDetails: {
+          name: userExists.name,
+          email: userExists.email,
+        },
         accessToken,
         refreshToken,
         message: "User logged in successfully",
