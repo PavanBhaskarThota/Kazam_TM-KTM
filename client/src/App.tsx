@@ -1,5 +1,5 @@
-import { NavBar } from "./components/mainComponents/NavBar"
-import { MainRoutes } from "./routes/MainRoutes"
+import { NavBar } from "./Components/mainComponents/NavBar"
+import { MainRoutes } from "./Routes/MainRoutes"
 
 
 function App() {
