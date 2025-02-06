@@ -2,10 +2,12 @@ import express, { Request, Response } from "express";
 import "dotenv/config"
 import { connectDB } from "./Database";
 import userRouter from "./Routes/userRoutes";
+import cors from "cors";
 
 const app = express()
 const port = process.env.PORT
 
+app.use(cors())
 app.use(express.json())
 app.use("/user",userRouter)
 

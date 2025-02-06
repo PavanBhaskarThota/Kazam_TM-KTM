@@ -1,5 +1,6 @@
-import { NavBar } from "./Components/mainComponents/NavBar"
-import { MainRoutes } from "./Routes/MainRoutes"
+import { Toaster } from "react-hot-toast"
+import { NavBar } from "./components/mainComponents/NavBar"
+import { MainRoutes } from "./routes/MainRoutes"
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 
   return (
     <>
+     <Toaster position="top-right" reverseOrder={false} />
       <NavBar/>
       <MainRoutes/>
     </>
