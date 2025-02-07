@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UserData } from "../../Types/commonTypes";
 import authServices from "../../services/authServices";
 import toast from "react-hot-toast";
+import api from "../../Api";
+import tokenServices from "../../services/tokenServices";
 
 export const createUser = createAsyncThunk(
   "user/createUser",
@@ -31,16 +33,45 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  "user/logoutUser",
+  async (userData: UserData, { rejectWithValue }) => {
+    try {
+      const res = await authServices.loginUser(userData);
+      if (res.status === 200) {
+        return res.data;
+      }
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
-  user: {},
+  user: null,
   status: "",
-  error: "null",
+  error: "",
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    getUser: (state) => {
+      const user = JSON.parse(localStorage.getItem("user") ?? "null");
+      if (user !== "null") state.user = user;
+    },
+    logout: (state) => {
+      toast.success("Logged out successfully");
+      tokenServices.clearStorage();
+      api.defaults.headers["Authorization"] = "";
+      state.user = null;
+      // state.userNameTaken = null;
+      state.status = "";
+      state.error = "";
+      // state.userProfileData = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -51,10 +82,16 @@ const userSlice = createSlice({
         state.user = action.payload;
         if (action.payload.message === "User already exists!") {
           toast.error("User already exists with this email");
-          state.status = "failed";
+          state.status = "";
         } else {
           toast.success("User created successfully");
-          saveUserToLocalStorage(action.payload);
+          const obj = {
+            user: action.payload.userDetails,
+            token: action.payload.token,
+            message: action.payload.message,
+            error: "",
+          };
+          saveUserToLocalStorage(obj);
           state.status = "success";
           state.user = action.payload.user;
         }
@@ -72,12 +109,12 @@ const userSlice = createSlice({
 
         const obj = {
           user: action.payload.userDetails,
-          token: action.payload.accessToken,
-          message:'Logged in successfully',
-          error:''
-        }
+          token: action.payload.token,
+          message: "Logged in successfully",
+          error: "",
+        };
 
-        console.log(obj)
+        console.log(obj);
 
         const status = saveUserToLocalStorage(obj);
         if (status) {
@@ -95,7 +132,7 @@ const userSlice = createSlice({
 });
 
 const saveUserToLocalStorage = ({ user, token, message, error }: any) => {
-  console.log('triggered')
+  console.log("triggered");
   if (user && token) {
     toast.success("Logged in successfully");
     localStorage.setItem("user", JSON.stringify(user));
@@ -108,8 +145,8 @@ const saveUserToLocalStorage = ({ user, token, message, error }: any) => {
       toast.error(message);
     }
     return false;
-  };
-
+  }
 };
 
+export const { getUser, logout } = userSlice.actions;
 export default userSlice.reducer;

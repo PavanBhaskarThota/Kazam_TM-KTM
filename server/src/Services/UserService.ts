@@ -10,16 +10,14 @@ class UserService {
       const userExists = await UserModel.findOne({ email });
 
       if (userExists) {
-        return "User already exists";
+        return "User already exists!";
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new UserModel({ name, email, password: hashedPassword });
       await newUser.save();
 
-      const accessToken = jwt.sign({ userEmail: newUser.email }, "secret", {
-        expiresIn: "1hr",
-      });
-      const refreshToken = jwt.sign({ userEmail: newUser.email }, "secret", {
+      
+      const token = jwt.sign({ userId: newUser._id, userEmail: newUser.email }, "secret", {
         expiresIn: "7d",
       });
 
@@ -28,8 +26,7 @@ class UserService {
           name: newUser.name,
           email: newUser.email,
         },
-        accessToken,
-        refreshToken,
+        token,
         message: "User created successfully",
       };
     } catch (error) {
@@ -52,10 +49,8 @@ class UserService {
       if (!isPasswordValid) {
         return "Invalid credentials";
       }
-      const accessToken = jwt.sign({ userEmail: userExists.email }, "secret", {
-        expiresIn: "1hr",
-      });
-      const refreshToken = jwt.sign({ userEmail: userExists.email }, "secret", {
+     
+      const token = jwt.sign({ userId: userExists._id, userEmail: userExists.email }, "secret", {
         expiresIn: "7d",
       });
       return {
@@ -63,8 +58,7 @@ class UserService {
           name: userExists.name,
           email: userExists.email,
         },
-        accessToken,
-        refreshToken,
+        token,
         message: "User logged in successfully",
       };
     } catch (error) {

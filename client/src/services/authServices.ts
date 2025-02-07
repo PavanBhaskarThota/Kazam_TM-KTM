@@ -9,6 +9,12 @@ const authServices = {
   async loginUser(userData: UserData) {
     return await api.post("/user/login", userData);
   },
+
+  async logoutUser() {
+    return await api.post("/user/login");
+  },
+
+
 };
 
 export default authServices;

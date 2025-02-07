@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
     match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
   password: { type: String, required: true }
-});
+},
+{ timestamps: true }
+);
 
 const UserModel = mongoose.model("user", userSchema);
 

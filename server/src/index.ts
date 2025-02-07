@@ -3,6 +3,8 @@ import "dotenv/config"
 import { connectDB } from "./Database";
 import userRouter from "./Routes/userRoutes";
 import cors from "cors";
+import taskRouter from "./Routes/taskRoutes";
+import projectRouter from "./Routes/projectRoutes";
 
 const app = express()
 const port = process.env.PORT
@@ -10,6 +12,8 @@ const port = process.env.PORT
 app.use(cors())
 app.use(express.json())
 app.use("/user",userRouter)
+app.use("/task",taskRouter)
+app.use("/project",projectRouter)
 
 app.get('/', (req:Request,res:Response)=>{
     try {

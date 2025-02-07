@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { DynamicInput } from "./DynamicInput";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, loginUser } from "../../redux/Slices/user.slice";
 import { Loading } from "../../components/subComponents/Loading/Loading";
+import { AppDispatch } from "../../redux/store";
 
 export const Auth = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -14,8 +15,9 @@ export const Auth = () => {
     password: "",
   });
   const [isSigned, setIsSigned] = useState(true);
-
   const [passwordType, setPasswordType] = useState("password");
+
+  const isAuthenticated = !!localStorage.getItem("token");
 
   const { status } = useSelector((state: any) => state.users);
   const handleChange = (e: any) => {
@@ -36,7 +38,7 @@ export const Auth = () => {
   };
 
   if (status === "success") {
-    navigate("/");
+    navigate(-1);
   }
 
   const handleIsSigned = () => {
@@ -78,19 +80,25 @@ export const Auth = () => {
     },
   ];
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
+
   if (status === "loading") {
     return <Loading />;
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center py-10 h-[80vh]">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-[400px]">
+    <div className="flex flex-col gap-4 justify-center items-center py-10 h-[92vh] bg-gradient-to-b from-[#A6CDC6] to-white">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-[350px]">
         {inputData.map((input) => (
           <DynamicInput key={input.name} {...input} />
         ))}
 
         <h2
-          className="text-blue-500 text-lg cursor-pointer self-end"
+          className="text-[#468585] text-lg cursor-pointer self-end"
           onClick={() =>
             setPasswordType(passwordType == "password" ? "text" : "password")
           }
@@ -99,7 +107,7 @@ export const Auth = () => {
         </h2>
         <button
           type="submit"
-          className="bg-blue-500 text-white p-4 rounded-full"
+          className="bg-[#468585] text-white p-4 rounded-md"
         >
           {isSigned ? "Login" : "Sign Up"}
         </button>
@@ -108,9 +116,9 @@ export const Auth = () => {
       <h2>
         {isSigned ? "Don't have an account?  " : "Already have and account?  "}{" "}
         <Link
-          to={`/${isSigned ? "signup" : "login"}`}
+          to={`/auth`}
           onClick={handleIsSigned}
-          className="text-blue-500 text-lg"
+          className="text-[#468585] text-lg"
         >
           {isSigned ? " Sign Up" : " Login"}
         </Link>
