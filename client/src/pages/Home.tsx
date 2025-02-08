@@ -36,7 +36,7 @@ export const Home = () => {
         </div>
         <div
           className=" h-64 w-full rounded-lg"
-          data-aos="fade-left"
+          data-aos="fade-up"
           data-aos-duration="700"
         >
           <img src={image1} alt="" className="w-full object-contain h-64" />
@@ -55,7 +55,7 @@ export const Home = () => {
         >
           <img src={image2} alt="" className="w-full object-contain h-64" />
         </div>
-        <div data-aos="fade-left" data-aos-duration="700">
+        <div data-aos="fade-up" data-aos-duration="700">
           <h2 className="text-3xl font-semibold mb-4">
             Seamless Collaboration
           </h2>
@@ -84,7 +84,7 @@ export const Home = () => {
         </div>
         <div
           className=" h-64 w-full rounded-lg"
-          data-aos="fade-left"
+          data-aos="fade-up"
           data-aos-duration="700"
         >
           <img src={image3} alt="" className="w-full object-contain h-64" />
@@ -103,7 +103,7 @@ export const Home = () => {
         >
           <img src={image4} alt="" className="w-full object-contain h-64" />
         </div>
-        <div data-aos="fade-left" data-aos-duration="700">
+        <div data-aos="fade-up" data-aos-duration="700">
           <h2 className="text-3xl font-semibold mb-4">Intuitive Dashboard</h2>
           <p className="text-lg">
             View your tasks in a clean and user-friendly dashboard. Customize

@@ -6,6 +6,7 @@ export const getTasks = createAsyncThunk(
   "task/getTasks",
   async (id: any, { rejectWithValue }) => {
     try {
+      console.log(id);
       const res = await taskServices.getTasks(id);
       return res.data;
     } catch (error) {

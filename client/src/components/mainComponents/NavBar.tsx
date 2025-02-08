@@ -98,7 +98,7 @@ export const NavBar = () => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <img
-              src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg"
+              src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-850.jpg?ga=GA1.1.709686024.1684082835&semt=ais_incoming"
               alt="User Avatar"
               className="w-10 h-10 rounded-full border-gray-500 border"
             />

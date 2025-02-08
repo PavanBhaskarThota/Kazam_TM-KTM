@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-// import { FaBars, FaTimes, FaHome, FaTasks, FaCog } from "react-icons/fa";
 
 export const DashBoard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +14,12 @@ export const DashBoard = () => {
         } transition-transform duration-300 ease-in-out md:relative md:translate-x-0`}
       >
         <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Dashboard</h1>
           <button
             onClick={() => setIsOpen(false)}
             className="font-bold text-red-700 text-2xl md:hidden"
           >
-            {/* <FaTimes size={24} />  */}
-            {`<`}
+            {`x`}
           </button>
         </div>
         <nav>
@@ -34,7 +33,6 @@ export const DashBoard = () => {
                 }  hover: p-2 rounded`}
                 onClick={() => setIsOpen(false)}
               >
-                {/* <FaHome />  */}
                 Dashboard
               </li>
             </Link>
@@ -45,21 +43,20 @@ export const DashBoard = () => {
                 }  hover: p-2 rounded`}
                 onClick={() => setIsOpen(false)}
               >
-                {/* <FaTasks /> */}
                 Tasks
               </li>
             </Link>
-            <Link to={"/dashboard/projects"}>
+            {/* <Link to={"/dashboard/projects"}>
               <li
                 className={`flex items-center space-x-3 cursor-pointer ${
                   currentPath[2] === "projects" ? "bg-[#468585]" : ""
                 }  hover: p-2 rounded`}
                 onClick={() => setIsOpen(false)}
               >
-                {/* <FaHome />  */}
+                <FaHome /> 
                 Projects
               </li>
-            </Link>
+            </Link> */}
           </ul>
         </nav>
       </div>
@@ -71,7 +68,6 @@ export const DashBoard = () => {
               onClick={() => setIsOpen(true)}
               className="font-bold text-gray-700 text-2xl md:hidden"
             >
-              {/* <FaBars size={24} />  */}
               {`>`}
             </button>
             <h1 className="ml-4 text-xl font-semibold first-letter:uppercase">

@@ -8,12 +8,12 @@ export const TaskCard = ({ props }: any) => {
   const dispatch = useDispatch();
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
-  let taskPriority = "text-yellow-400";
+  let taskPriority = "text-yellow-600";
 
   if (props.priority === "high") {
     taskPriority = "text-red-600";
   } else if (props.priority === "medium") {
-    taskPriority = "text-orange-400";
+    taskPriority = "text-orange-700";
   }
 
   let taskStatus = "";
@@ -61,7 +61,7 @@ export const TaskCard = ({ props }: any) => {
   }, []);
 
   return (
-    <div className=" flex flex-col shadow py-2 px-2 gap-2 border-[0.5px] border-gray-400 mb-4 rounded-md min-w-[200px]">
+    <div className=" flex flex-col shadow py-2 px-2 gap-2 border-[0.5px] border-gray-400 mb-4 rounded-md w-[90%] min-w-[200px]">
       <div className="flex justify-between">
         <h1
           className={`text-lg font-semibold mb-2 first-letter:uppercase ${taskStatus}`}
@@ -69,7 +69,7 @@ export const TaskCard = ({ props }: any) => {
           {props.title}
         </h1>
         <p
-          className={`${taskPriority} first-letter:uppercase p-1 px-3 bg-gray-300 rounded-md text-[12px]`}
+          className={`${taskPriority} first-letter:uppercase py-2 px-3 bg-gray-200 rounded-md text-[12px]`}
         >
           {props.priority === "high"
             ? "High"
