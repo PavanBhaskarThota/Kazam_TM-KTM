@@ -70,12 +70,12 @@ export const DashBoard = () => {
             >
               {`>`}
             </button>
-            <h1 className="ml-4 text-xl font-semibold first-letter:uppercase">
+            {/* <h1 className="ml-4 text-xl font-semibold first-letter:uppercase">
               {currentPath.length > 2 ? currentPath[2] : "Dashboard"}
-            </h1>
+            </h1> */}
           </header>
         </div>
-        <main className="p-4 flex-1">
+        <main className=" flex-1">
           <Outlet />
         </main>
       </div>

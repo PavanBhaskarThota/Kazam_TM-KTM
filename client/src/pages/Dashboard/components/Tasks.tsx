@@ -36,8 +36,8 @@ export const Tasks = () => {
     );
 
   return !showModal ? (
-    <div className="max-h-[80vh] flex flex-col  overflow-hidden">
-      <div className="flex justify-between items-center bg-white p-4 shadow-md">
+    <div className="max-h-[87vh] flex flex-col overflow-hidden">
+      <div className="flex justify-between items-center bg-white p-2 shadow-md">
         <h1 className="text-2xl font-bold">All Tasks</h1>
         <button
           className="bg-[#468585] text-white py-2 px-4 rounded-full"
@@ -47,8 +47,8 @@ export const Tasks = () => {
         </button>
       </div>
 
-      <div className="block lg:hidden mt-4">
-        <div className="flex justify-between border-b overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div className="block lg:hidden">
+        <div className="flex justify-between overflow-x-auto whitespace-nowrap scrollbar-hide">
           {statuses.map((status) => (
             <button
               key={status}
@@ -64,7 +64,7 @@ export const Tasks = () => {
           ))}
         </div>
 
-        <div className="flex-1 min-h-[65vh] max-h-[65vh] overflow-y-auto p-4 bg-white rounded-lg">
+        <div className="flex-1 min-h-[90vh] max-h-[90vh] overflow-y-auto p-4 bg-white rounded-lg">
           {tasks.length > 0 ? (
             tasks
               .filter((task) => task.status === activeTab)
@@ -75,14 +75,14 @@ export const Tasks = () => {
         </div>
       </div>
 
-      <div className="hidden lg:grid grid-cols-4 flex-1 mt-4 border rounded-lg bg-white">
+      <div className="hidden lg:grid grid-cols-4 flex-1  rounded-lg bg-white">
         {statuses.map((status) => (
           <div key={status} className="flex flex-col h-full">
-            <div className="bg-gray-100 p-3 font-bold text-center border-b capitalize">
+            <div className="border p-3 font-bold text-center border-gray-300 capitalize">
               {status}
             </div>
 
-            <div className="flex-1 min-h-[60vh] max-h-[65vh] overflow-y-auto p-2 no-scrollbar">
+            <div className="flex-1 min-h-[90vh] max-h-[90vh] overflow-y-auto p-2 no-scrollbar">
               {tasks.length > 0 ? (
                 tasks
                   .filter((task) => task.status === status)

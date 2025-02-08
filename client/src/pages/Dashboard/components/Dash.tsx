@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../../../redux/Slices/tasks.slice";
 export const Dash = () => {
@@ -20,7 +20,7 @@ export const Dash = () => {
     (task: any) => task.status === "won't do"
   ).length;
 
-  const recentTasks = tasks.slice(-5);
+  const recentTasks = tasks.slice(-3);
 
   useEffect(() => {
     dispatch(getTasks(user.userId) as any);
@@ -34,7 +34,7 @@ export const Dash = () => {
     );
 
   return (
-    <div className="p-5 space-y-5">
+    <div className="h-full p-5 space-y-5 bg-white">
       <h1 className="text-2xl font-bold">Task Dashboard</h1>
       <div className="text-[#468585] p-4 rounded-lg text-center border">
         <h2 className="text-lg font-semibold">Total Tasks</h2>
