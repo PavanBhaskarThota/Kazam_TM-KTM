@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TaskCard } from "../../../components/subComponents/TaskCard";
 import { getTasks } from "../../../redux/Slices/tasks.slice";
-import { NewLoading } from "../../../components/subComponents/Loading/NewLoading";
-
 export const Dash = () => {
   const dispatch = useDispatch();
   const { tasks, status } = useSelector((state: any) => state.tasks);
