@@ -23,6 +23,7 @@ class UserService {
 
       return {
         userDetails: {
+          userId: newUser._id,
           name: newUser.name,
           email: newUser.email,
         },
@@ -55,6 +56,7 @@ class UserService {
       });
       return {
         userDetails: {
+          userId: userExists._id,
           name: userExists.name,
           email: userExists.email,
         },

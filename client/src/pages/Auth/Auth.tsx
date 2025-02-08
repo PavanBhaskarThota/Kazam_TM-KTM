@@ -82,7 +82,7 @@ export const Auth = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate("/");
     }
   }, [isAuthenticated]);
 
@@ -107,7 +107,7 @@ export const Auth = () => {
         </h2>
         <button
           type="submit"
-          className="bg-[#468585] text-white p-4 rounded-md"
+          className="bg-[#468585] text-white p-4 rounded-md cursor-pointer"
         >
           {isSigned ? "Login" : "Sign Up"}
         </button>

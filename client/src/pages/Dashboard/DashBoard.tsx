@@ -26,43 +26,60 @@ export const DashBoard = () => {
         <nav>
           <ul className="space-y-4">
             <Link to={"/dashboard"}>
-              <li className="flex items-center space-x-3 cursor-pointer hover:bg-[#468585] p-2 rounded">
+              <li
+                className={`flex items-center space-x-3 cursor-pointer ${
+                  currentPath[1] === "dashboard" && currentPath[2] === undefined
+                    ? "bg-[#468585]"
+                    : ""
+                }  hover: p-2 rounded`}
+                onClick={() => setIsOpen(false)}
+              >
                 {/* <FaHome />  */}
                 Dashboard
               </li>
             </Link>
-            <Link to={"/dashboard/projects"}>
-              <li className="flex items-center space-x-3 cursor-pointer hover:bg-[#468585] p-2 rounded">
-                {/* <FaHome />  */}
-                Projects
-              </li>
-            </Link>
             <Link to={"/dashboard/tasks"}>
-              <li className="flex items-center space-x-3 cursor-pointer hover:bg-[#468585] p-2 rounded">
+              <li
+                className={`flex items-center space-x-3 cursor-pointer ${
+                  currentPath[2] === "tasks" ? "bg-[#468585]" : ""
+                }  hover: p-2 rounded`}
+                onClick={() => setIsOpen(false)}
+              >
                 {/* <FaTasks /> */}
                 Tasks
               </li>
             </Link>
-            <li className="flex items-center space-x-3 cursor-pointer hover:bg-[#468585] p-2 rounded">
-              {/* <FaCog />  */}
-              <span>Settings</span>
-            </li>
+            <Link to={"/dashboard/projects"}>
+              <li
+                className={`flex items-center space-x-3 cursor-pointer ${
+                  currentPath[2] === "projects" ? "bg-[#468585]" : ""
+                }  hover: p-2 rounded`}
+                onClick={() => setIsOpen(false)}
+              >
+                {/* <FaHome />  */}
+                Projects
+              </li>
+            </Link>
           </ul>
         </nav>
       </div>
 
       <div className="flex-1 flex flex-col">
-        <header className="bg-white shadow p-4 flex items-center">
-          <button
-            onClick={() => setIsOpen(true)}
-            className="font-bold text-gray-700 text-2xl md:hidden"
-          >
-            {/* <FaBars size={24} />  */}
-            {`>`}
-          </button>
-          <h1 className="ml-4 text-xl font-semibold first-letter:uppercase">{currentPath.length>2 ? currentPath[2] : "Dashboard"}</h1>
-        </header>
-        <main className="p-6 flex-1">
+        <div className="bg-[#A6CDC6]">
+          <header className="bg-white shadow p-4 flex items-center">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="font-bold text-gray-700 text-2xl md:hidden"
+            >
+              {/* <FaBars size={24} />  */}
+              {`>`}
+            </button>
+            <h1 className="ml-4 text-xl font-semibold first-letter:uppercase">
+              {currentPath.length > 2 ? currentPath[2] : "Dashboard"}
+            </h1>
+          </header>
+        </div>
+        <main className="p-4 flex-1">
           <Outlet />
         </main>
       </div>

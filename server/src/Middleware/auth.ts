@@ -17,7 +17,6 @@ export const auth = async(req: any, res: any, next: any) => {
     
     next();
   } catch (error) {
-    console.log(error);
     res.status(401).send({message: "Unauthorized", error});
   }
 };

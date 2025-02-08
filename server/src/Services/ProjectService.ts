@@ -18,7 +18,6 @@ class ProjectService {
 
   async getProjects(user: any) {
     try {
-      console.log(user);
       const result = await ProjectModel.find({ members: user.userId });
       return result;
     } catch (error) {

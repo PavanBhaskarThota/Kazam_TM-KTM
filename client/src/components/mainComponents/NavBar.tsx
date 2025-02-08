@@ -11,7 +11,7 @@ export const NavBar = () => {
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
   const location = useLocation();
-  const showDashboard = location.pathname === "/dashboard";
+  const showDashboard = location.pathname.split("/")[1] === "dashboard";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -52,16 +52,19 @@ export const NavBar = () => {
 
   return (
     <div className="flex justify-between items-center w-full h-[8vh] px-6 bg-[#A6CDC6] relative">
-      <div className="flex gap-4 items-center">
-        <h1 className="text-2xl font-bold">
+      <div className="flex gap-5 items-center">
+        <h1 className="text-2xl font-bold text-[#468585] font-serif">
           <Link to={"/"}>CoDesk</Link>
         </h1>
         {user && (
           <Link
             to={"/dashboard"}
             style={{
-              fontWeight: showDashboard ? "600" : "normal",
-              color: showDashboard ? "black" : "inherit",
+              color: showDashboard ? "white" : "inherit",
+              backgroundColor: showDashboard ? "#468585" : "transparent",
+              padding: "5px 20px",
+              borderRadius: "5px",
+              
             }}
           >
             DashBoard
@@ -74,7 +77,7 @@ export const NavBar = () => {
           <Link to={"/"} className="hover:underline">
             Home
           </Link>
-          <Link to={"/projects"} className="hover:underline">
+          <Link to={"/tasks"} className="hover:underline">
             About
           </Link>
           <Link to={"/tasks"} className="hover:underline">
