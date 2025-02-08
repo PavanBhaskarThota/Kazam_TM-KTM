@@ -48,7 +48,7 @@ class UserService {
         userExists.password
       );
       if (!isPasswordValid) {
-        return "Invalid credentials";
+        return {message:"Invalid credentials"};
       }
      
       const token = jwt.sign({ userId: userExists._id, userEmail: userExists.email }, "secret", {

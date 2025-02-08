@@ -126,7 +126,7 @@ export const Home = () => {
 
       <footer className="bg-[#468585] text-white py-6 text-center">
         <p className="text-sm">
-          &copy; 2025 Task Manager. All rights reserved.
+          &copy; 2025 CoDesk. All rights reserved.
         </p>
       </footer>
     </div>
