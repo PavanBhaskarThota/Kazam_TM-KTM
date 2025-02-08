@@ -1,9 +1,24 @@
+// {
+//   "compilerOptions": {
+//     "noUnusedLocals": false,
+//     "noUnusedParameters": false,
+//     "module": "es2020",
+//     "moduleResolution": "bundler",
+//     "jsx": "react-jsx",
+//     "allowImportingTsExtensions": true,
+//     "resolveJsonModule": true
+//   }
+// }
+
 {
   "compilerOptions": {
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "module":"es2020",
-    "moduleResolution": "node"
-
+    "module": "es2020",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "noEmit": true
   }
 }
