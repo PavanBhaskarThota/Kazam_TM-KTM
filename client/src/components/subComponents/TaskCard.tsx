@@ -61,7 +61,7 @@ export const TaskCard = ({ props }: any) => {
   }, []);
 
   return (
-    <div className=" flex flex-col shadow py-2 px-2 gap-2 border-[0.5px] border-gray-400 mb-4 rounded-md w-[90%] min-w-[200px]">
+    <div className=" flex flex-col shadow py-2 px-2 gap-2 border-[0.5px] border-gray-400 mb-4 rounded-md w-[90%] min-w-[200px] m-auto">
       <div className="flex justify-between">
         <h1
           className={`text-lg font-semibold mb-2 first-letter:uppercase ${taskStatus}`}

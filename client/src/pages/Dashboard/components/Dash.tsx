@@ -65,7 +65,7 @@ export const Dash = () => {
           <p className="text-4xl mt-3 font-bold">{inprogressCount}</p>
         </div>
         <div className="text-[#77B254] p-4 border rounded-lg text-center">
-          <h2 className="text-lg font-semibold">Pending</h2>
+          <h2 className="text-lg font-semibold">Completed</h2>
           <p className="text-4xl mt-3 font-bold">{completedCount}</p>
         </div>
         <div className="text-[#BE3144] p-4 border rounded-lg text-center">

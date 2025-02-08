@@ -67,7 +67,7 @@ export const NavBar = () => {
               
             }}
           >
-            DashBoard
+            Dashboard
           </Link>
         )}
       </div>
