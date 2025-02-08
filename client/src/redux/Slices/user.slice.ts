@@ -25,6 +25,7 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await authServices.loginUser(userData);
       if (res.status === 200) {
+        console.log(res.data);
         return res.data;
       }
     } catch (error: any) {

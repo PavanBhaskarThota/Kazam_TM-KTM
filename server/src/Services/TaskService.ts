@@ -10,7 +10,7 @@ class TaskService {
       }
       const result = new TaskModel(newTask);
       await result.save();
-      return { result, message: "Task created successfully" };
+      return result;
     } catch (error) {
       return error;
     }
@@ -18,10 +18,32 @@ class TaskService {
 
   async getTasks(user: any) {
     try {
-      console.log(user);
       const createdTasks = await TaskModel.find({ creator: user.userId });
       const assignedTasks = await TaskModel.find({ assignedTo: user.userId });
-      return { createdTasks, assignedTasks };
+      const allTasks = [...createdTasks, ...assignedTasks];
+      return allTasks;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async updateTask(task: any, id: any) {
+    try {
+      console.log(task)
+      const result = await TaskModel.findOneAndUpdate({ _id: id }, task, {
+        new: true,
+      });
+      console.log(result)
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteTask(id: any) {
+    try {
+      const result = await TaskModel.findOneAndDelete({ _id: id }, { new: true });
+      return result;
     } catch (error) {
       return error;
     }

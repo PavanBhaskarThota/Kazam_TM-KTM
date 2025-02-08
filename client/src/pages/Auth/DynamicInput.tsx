@@ -17,7 +17,7 @@ export const DynamicInput: React.FC<any> = ({
         name={name}
         value={value}
         onChange={handleChange}
-        className="bg-white p-4 rounded-md border border-gray-300 w-full outline-[0.5px] outline-gray-400"
+        className={`bg-white p-4 rounded-md border border-gray-300 w-full outline-[0.5px] outline-gray-400 `}
       />
     </div>
   );

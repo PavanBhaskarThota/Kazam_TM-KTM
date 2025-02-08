@@ -6,7 +6,6 @@ class TaskController {
     try {
       const task = req.body;
       const user = req.user
-      console.log(task);
       const result = await TaskService.createTask(task,user);
       res.status(200).send(result);
     } catch (error) {
@@ -18,6 +17,27 @@ class TaskController {
     try {
       const user = req.user
       const result = await TaskService.getTasks(user);
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
+
+  async updateTask(req: any, res: Response) {
+    try {
+      const task = req.body;
+      const id = req.params.id;
+      const result = await TaskService.updateTask(task, id);
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
+
+  async deleteTask(req: any, res: Response) {
+    try {
+      const id = req.params.id;
+      const result = await TaskService.deleteTask(id);
       res.status(200).send(result);
     } catch (error) {
       res.status(400).send(error);
