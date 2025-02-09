@@ -11,10 +11,10 @@ export const createUser = createAsyncThunk(
     try {
       const res = await authServices.createUser(userData);
       if (res.status === 200) {
-        console.log(res.data);
         return res.data;
       }
     } catch (error: any) {
+      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -52,6 +52,7 @@ const initialState = {
   user: null,
   status: "",
   error: "",
+  message: "",
 };
 
 const userSlice = createSlice({
@@ -79,13 +80,13 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.status = "success";
-        state.user = action.payload;
         if (action.payload.message === "User already exists!") {
           toast.error("User already exists with this email");
           state.status = "";
-        } else {
-          toast.success("User created successfully");
+        } else if (action.payload.message === "Invalid credentials") {
+          toast.error("Invalid credentials");
+          state.status = "";
+        } else if (action.payload.message === "User created successfully") {
           const obj = {
             user: action.payload.userDetails,
             token: action.payload.token,
@@ -95,11 +96,20 @@ const userSlice = createSlice({
           saveUserToLocalStorage(obj);
           state.status = "success";
           state.user = action.payload.user;
+        }else{
+          state.status = "failed";
+          if (action.payload.message) {
+            state.error = action.payload.message;
+            toast.error(action.payload.message);
+          }
         }
       })
       .addCase(createUser.rejected, (state, action) => {
         state.status = "failed";
-        if (action.error.message) state.error = action.error.message;
+        if (action.error.message) {
+          state.error = action.error.message;
+          toast.error(action.error.message);
+        }
       })
       .addCase(loginUser.pending, (state) => {
         state.status = "loading";
@@ -111,11 +121,9 @@ const userSlice = createSlice({
         const obj = {
           user: action.payload.userDetails,
           token: action.payload.token,
-          message: "Logged in successfully",
+          message: action.payload.message,
           error: "",
         };
-
-        console.log(obj);
 
         const status = saveUserToLocalStorage(obj);
         if (status) {
@@ -133,7 +141,6 @@ const userSlice = createSlice({
 });
 
 const saveUserToLocalStorage = ({ user, token, message, error }: any) => {
-  console.log("triggered");
   if (user && token) {
     toast.success("Logged in successfully");
     localStorage.setItem("user", JSON.stringify(user));

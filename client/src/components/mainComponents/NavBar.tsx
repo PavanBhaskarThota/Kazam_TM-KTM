@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router";
 import { getUser, logout } from "../../redux/Slices/user.slice";
+import userImage from "../../Assets/users/user2.jpg"
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,7 @@ export const NavBar = () => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <img
-              src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-850.jpg?ga=GA1.1.709686024.1684082835&semt=ais_incoming"
+              src={userImage}
               alt="User Avatar"
               className="w-10 h-10 rounded-full border-gray-500 border"
             />

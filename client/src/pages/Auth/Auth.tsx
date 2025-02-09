@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser, loginUser } from "../../redux/Slices/user.slice";
 import { Loading } from "../../components/subComponents/Loading/Loading";
 import { AppDispatch } from "../../redux/store";
+import toast from "react-hot-toast";
 
 export const Auth = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,6 +30,18 @@ export const Auth = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    if(user.email === "" || user.password === ""){
+      toast.error("All fields are required");
+      return
+    }
+
+    if(!isSigned){
+      if(user.name === ""){
+        toast.error("Name is required");
+        return
+      }
+    }
 
     if (isSigned) {
       dispatch(loginUser(user));
@@ -87,7 +100,11 @@ export const Auth = () => {
   }, [isAuthenticated]);
 
   if (status === "loading") {
-    return <Loading />;
+    return (
+      <div className="bg-gradient-to-b from-[#A6CDC6] to-white">
+        <Loading />
+      </div>
+    );
   }
 
   return (

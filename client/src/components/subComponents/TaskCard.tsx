@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTask, updateTask } from "../../redux/Slices/tasks.slice";
 
-export const TaskCard = ({ props }: any) => {
+export const TaskCard = ({ props, handleSelectedTask }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -62,12 +62,16 @@ export const TaskCard = ({ props }: any) => {
 
   return (
     <div className=" flex flex-col shadow py-2 px-2 gap-2 border-[0.5px] border-gray-400 mb-4 rounded-md w-[90%] min-w-[200px] m-auto">
-      <div className="flex justify-between">
+      <div
+        className="flex justify-between cursor-pointer"
+        onClick={() => handleSelectedTask(props._id)}
+      >
         <h1
-          className={`text-lg font-semibold mb-2 first-letter:uppercase ${taskStatus}`}
+          className={`text-lg font-semibold mb-2 first-letter:uppercase ${taskStatus} truncate max-w-[150px]`}
         >
           {props.title}
         </h1>
+
         <p
           className={`${taskPriority} first-letter:uppercase py-2 px-3 bg-gray-200 rounded-md text-[12px]`}
         >
@@ -78,13 +82,16 @@ export const TaskCard = ({ props }: any) => {
             : "Low"}
         </p>
       </div>
-      <div>
-        <p className="text-[12px] text-gray-800 first-letter:uppercase">
+      <div className="cursor-pointer" onClick={() => handleSelectedTask(props._id)}>
+        <p className="text-[12px] text-gray-800 first-letter:uppercase truncate max-w-[150px]">
           {props.description}
         </p>
       </div>
 
-      <div className="flex justify-between border-t border-gray-400 items-end py-2">
+      <div
+        className="flex justify-between border-t border-gray-400 items-end py-2 cursor-pointer"
+        onClick={() => handleSelectedTask(props._id)}
+      >
         <div>
           <h2 className="text-[14px] text-gray-600 font-bold mb-0.5">
             Assigned To
@@ -130,11 +137,34 @@ export const TaskUpdate = ({
   handleUpdate,
 }: any) => {
   const status = ["pending", "inprogress", "completed", "won't do"];
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [position, setPosition] = useState("bottom");
+
+  useEffect(() => {
+    if (isOpen && dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect.bottom > windowHeight - 100) {
+        setPosition("top");
+      } else {
+        setPosition("bottom");
+      }
+    }
+  }, [isOpen]);
 
   return (
     isOpen && (
-      <div className="absolute right-0 top-0 mt-2 w-48 bg-white shadow-md rounded-lg p-2 border border-gray-200">
-        <div className="absolute top-[-6px] right-6 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45"></div>
+      <div
+        ref={dropdownRef}
+        className={`absolute right-0 ${
+          position === "top" ? "bottom-full mb-2" : "top-full mt-2"
+        } w-48 bg-white shadow-md rounded-lg p-2 border border-gray-200`}
+      >
+        <div
+          className={`absolute ${
+            position === "top" ? "bottom-[-6px]" : "top-[-6px]"
+          } right-6 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45`}
+        ></div>
         {status
           .filter((item) => item !== task.status)
           .map((item, index) => (

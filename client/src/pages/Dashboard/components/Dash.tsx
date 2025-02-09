@@ -1,6 +1,7 @@
 import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../../../redux/Slices/tasks.slice";
+import { Loading } from "../../../components/subComponents/Loading/Loading";
 export const Dash = () => {
   const dispatch = useDispatch();
   const { tasks, status } = useSelector((state: any) => state.tasks);
@@ -28,9 +29,7 @@ export const Dash = () => {
 
   if (status === "loading")
     return (
-      <div className="text-center h-1/2 flex justify-center items-center">
-        <h1 className="text-4xl font-bold">Loading....</h1>
-      </div>
+      <Loading/>
     );
 
   return (

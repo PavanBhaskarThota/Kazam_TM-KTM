@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { TaskCard } from "../../../components/subComponents/TaskCard";
 import { TaskModal } from "../../../components/subComponents/TaskModal";
 import "./styles.css";
+import { Loading } from "../../../components/subComponents/Loading/Loading";
 
 export const Tasks = () => {
   const dispatch = useDispatch();
@@ -13,11 +14,18 @@ export const Tasks = () => {
   const { tasks, status } = useSelector((state: any) => state.tasks);
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState("pending");
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   const statuses = ["pending", "inprogress", "completed", "won't do"];
 
   const handleModal = () => {
     setShowModal(false);
+    setSelectedTaskId(null);
+  };
+
+  const handleSelectedTask = (taskId: any) => {
+    setSelectedTaskId(taskId);
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -28,17 +36,13 @@ export const Tasks = () => {
     dispatch(getTasks(user.userId) as any);
   }, [dispatch, user.userId]);
 
-  if (status === "loading")
-    return (
-      <div className="text-center h-1/2 flex justify-center items-center">
-        <h1 className="text-4xl font-bold">Loading....</h1>
-      </div>
-    );
+  if (status === "loading") return <Loading />;
 
   return !showModal ? (
-    <div className="max-h-[87vh] flex flex-col overflow-hidden">
+    <div className="min-h-[85vh] flex flex-col overflow-hidden lg:min-h-[92vh]">
       <div className="flex justify-between items-center bg-white p-2 shadow-md">
         <h1 className="text-2xl font-bold">All Tasks</h1>
+        {/* <input type="text" placeholder="Search" className="border border-gray-300 w-1/2 p-2 px-6 rounded-full outline-gray-400"/> */}
         <button
           className="bg-[#468585] text-white py-2 px-4 rounded-full"
           onClick={() => setShowModal((prev) => !prev)}
@@ -64,11 +68,17 @@ export const Tasks = () => {
           ))}
         </div>
 
-        <div className="flex-1 min-h-[90vh] max-h-[90vh] overflow-y-auto p-4 bg-white rounded-lg">
+        <div className="flex-1 min-h-[74vh] max-h-[74vh] overflow-y-auto p-4 bg-white rounded-lg">
           {tasks.length > 0 ? (
             tasks
               .filter((task) => task.status === activeTab)
-              .map((task, index) => <TaskCard key={index} props={task} />)
+              .map((task, index) => (
+                <TaskCard
+                  key={index}
+                  handleSelectedTask={handleSelectedTask}
+                  props={task}
+                />
+              ))
           ) : (
             <p className="text-center text-gray-500">No Tasks</p>
           )}
@@ -82,11 +92,17 @@ export const Tasks = () => {
               {status}
             </div>
 
-            <div className="flex-1 min-h-[90vh] max-h-[90vh] overflow-y-auto p-2 no-scrollbar">
+            <div className="flex-1 max-h-[76vh] overflow-y-auto p-2 no-scrollbar pb-4">
               {tasks.length > 0 ? (
                 tasks
                   .filter((task) => task.status === status)
-                  .map((task, index) => <TaskCard key={index} props={task} />)
+                  .map((task, index) => (
+                    <TaskCard
+                      key={index}
+                      props={task}
+                      handleSelectedTask={handleSelectedTask}
+                    />
+                  ))
               ) : (
                 <p className="text-center text-gray-500">No Tasks</p>
               )}
@@ -96,6 +112,11 @@ export const Tasks = () => {
       </div>
     </div>
   ) : (
-    <TaskModal isOpen={showModal} handleModal={handleModal} />
+    <TaskModal
+      isOpen={showModal}
+      selectedTaskId={selectedTaskId}
+      handleModal={handleModal}
+      projectId={user?.projectId}
+    />
   );
 };

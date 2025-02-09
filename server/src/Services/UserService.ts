@@ -10,7 +10,7 @@ class UserService {
       const userExists = await UserModel.findOne({ email });
 
       if (userExists) {
-        return "User already exists!";
+        return {message:"User already exists!"};
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new UserModel({ name, email, password: hashedPassword });
@@ -40,7 +40,7 @@ class UserService {
       const { email, password } = user;
       const userExists = await UserModel.findOne({ email });
       if (!userExists) {
-        return "User does not exist";
+        return {message:"User does not exist"};
       }
 
       const isPasswordValid = await bcrypt.compare(
