@@ -46,6 +46,17 @@ The application is built using the **MERN stack** with TypeScript and styled usi
 ## 📷 Screenshots  
 
 ### 💻 Desktop View  
+
+### Home Page
+![alt text](image.png)
+
+### Dashboard Overview 
+![alt text](image-1.png)
+
+### Tasks Dashboard
+![alt text](image-2.png)
+
+
 ![Laptop View 1](./client/Assets/screenshots/Screen1.png)  
 ![Laptop View 2](../client/Assets/screenshots/Screen1.png)  
 ![Laptop View 3](../client/Assets/screenshots/Screen1.png)  
