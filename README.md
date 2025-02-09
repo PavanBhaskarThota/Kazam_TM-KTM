@@ -57,7 +57,12 @@ The application is built using the **MERN stack** with TypeScript and styled usi
 ![alt text](image-2.png)
 
 ### 📱 Mobile View  
-![Home page](image-3.png)![Overview page](image-4.png)![Tasks page](image-5.png)
+<p align="center">
+  <img src="image-3.png" width="30%" />
+  <img src="image-4.png" width="30%" />
+  <img src="image-5.png" width="30%" />
+</p>
+
 
 ---
 
