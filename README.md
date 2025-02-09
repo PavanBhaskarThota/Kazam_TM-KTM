@@ -56,20 +56,8 @@ The application is built using the **MERN stack** with TypeScript and styled usi
 ### Tasks Dashboard
 ![alt text](image-2.png)
 
-
-![Laptop View 1](./client/Assets/screenshots/Screen1.png)  
-![Laptop View 2](../client/Assets/screenshots/Screen1.png)  
-![Laptop View 3](../client/Assets/screenshots/Screen1.png)  
-
 ### 📱 Mobile View  
-![Mobile View 1](./screenshots/mobile1.png)  
-![Mobile View 2](./screenshots/mobile2.png)  
-![Mobile View 3](./screenshots/mobile3.png)  
-
----
-
-## 📜 License  
-This project is **open-source** and available under the **MIT License**.  
+![Home page](image-3.png)![Overview page](image-4.png)![Tasks page](image-5.png)
 
 ---
 
