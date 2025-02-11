@@ -1,7 +1,3 @@
-Here’s a well-structured `README.md` for your **CoDesk** task management project:  
-
----
-
 # CoDesk - Task Management Application
 
 CoDesk is a **modern task management application** that allows users to **create, update, and delete tasks** efficiently. It provides a seamless experience with **authentication, prioritization, and status tracking** for tasks. 
